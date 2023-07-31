@@ -4,8 +4,8 @@ import { Paddle } from "./paddle.entity";
 
 export class Ball extends Entity {
   
-  constructor(w: number, h: number) {
-    super(w, h);
+  constructor() {
+    super(ballConstatns.ballWidth, ballConstatns.ballHeight);
 
     const randomDirection = Math.random() * 2 - 1;
 
@@ -30,20 +30,41 @@ export class Ball extends Entity {
     if (this.y + this.height > gameConstants.canvasHeight || this.y < 0) {
       this.dy = -this.dy;
     } else if (this.x + this.width > gameConstants.canvasWidth) {
-      this.x = ballConstatns.startPosition.x;
-      /*
-        player1 score increment
-      */
+      this.ballReset();
+      ++player1.score;
     } else if (this.x < 0) {
-      this.x = ballConstatns.startPosition.x;
-      /*
-        player2 score increment
-      */
+      this.ballReset();
+     ++player2.score;
     }
 
     // check collision with paddles
-    if (this.x <= player1.x + player1.width || this.x >= player2.x + player2.width) {
+    // if (this.x <= player1.x + player1.width || this.x >= player2.x + player2.width) {
+    //   this.dx = -this.dx;
+    // }
+    if ((this.x <= player1.x + player1.width) && (this.y + this.height >= player1.y && this.y <= player1.y + player1.height)) {
       this.dx = -this.dx;
+    }
+    else if ((this.x >= player2.x) && (this.y + this.height >= player2.y && this.y <= player2.y + player2.height)) {
+      this.dx = -this.dx;
+    }
+  }
+
+  ballReset(){
+    this.x = ballConstatns.startPosition.x;
+    this.y = ballConstatns.startPosition.y;
+
+    const randomDirection = Math.random() * 2 - 1;
+    if (randomDirection < 0) {
+      this.dx = -1;
+    } else {
+      this.dx = 1;
+    }
+    this.dy = 1;
+  }
+
+  toDto(){
+    return {
+      ...super.toDto(),
     }
   }
 }

@@ -1,5 +1,5 @@
 
-export class Entity {
+export abstract class Entity {
   width: number;
   height: number;
   x: number;
@@ -13,8 +13,14 @@ export class Entity {
     this.width = w;
     this.height = h;
   };
-  // draw(context: CanvasRenderingContext2D) {
-  //   context.fillStyle = "#fff";
-  //   context.fillRect(this.x, this.y, this.width, this.height);
-  // }
+
+  toDto() {
+    return {
+      width: this.width,
+      height: this.height,
+      x: this.x,
+      y: this.y,
+      type: this.entityType,
+    }
+  }
 }

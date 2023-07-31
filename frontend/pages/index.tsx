@@ -3,34 +3,35 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 export default function Home() {
-  const [id, setId] = useState('');
+  // const [id, setId] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post('http://localhost:3001/match/join', { id });
+  //     const message = response.data.message;
+  //     alert(message);
 
-    try {
-      const response = await axios.post('http://localhost:3001/api/submit', { id });
-      const message = response.data.message;
-      alert(message);
+  //     router.push('/game');
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-      router.push('/match'); // '/match' 페이지로 이동
-    } catch (error) {
-      console.error(error);
-    }
+  const handleClick = async () => {
+    router.push('/app');
   };
-
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          placeholder="Enter ID"
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <h1>
+        HOME PAGE
+      </h1>
+      <br></br>
+      <h2>
+        Move to Match PAGE
+      </h2>
+      <button onClick={handleClick}>Match Page</button>
     </div>
-  );
+  )
 }

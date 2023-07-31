@@ -19,7 +19,7 @@ export class AppController {
     return { message };
   }
 
-  @Post('move')
+  @Post(':id/move')
   moveRectangle(@Body() body: { x: number, y: number }): void {
     this.rectanglePos.x = body.x;
     this.rectanglePos.y = body.y;

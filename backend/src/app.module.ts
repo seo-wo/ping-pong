@@ -2,18 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HttpModule } from '@nestjs/axios';
+import { MatchModule } from './match/match.module';
+
 
 @Module({
   imports: [
-    HttpModule.register({
-      baseURL: 'http://localhost:3001',
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers':
-          'Origin, X-Requested-With, Content-Type, Accept',
-      },
-    }),
+    MatchModule,
   ],
   controllers: [AppController],
   providers: [AppService],
